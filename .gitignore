@@ -1,0 +1,42 @@
+# Maven
+/target/
+!.mvn/wrapper/maven-wrapper.jar
+**/logs/
+**/*.log
+**/*.tmp
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+out/
+*.ipr
+
+# VS Code (если кто-то откроет там)
+.vscode/
+
+# OS/macOS/Windows
+.DS_Store
+Thumbs.db
+
+# Lombok cache (если вдруг)
+.lombok/
+
+# Compiled class files
+*.class
+
+# Build artifacts
+*.jar
+*.war
+*.ear
+
+# Test reports
+/surefire-reports/
+/jacoco.exec
+/coverage/
+
+# Misc
+*.swp
+*.bak
+*.orig
+*.rej
