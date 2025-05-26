@@ -13,6 +13,7 @@
         <module>shelduer-core</module>
         <module>shelduer-api</module>
         <module>examples</module>
+        <module>shelduer-spring</module>
     </modules>
 
     <properties>
@@ -24,6 +25,11 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-aop</artifactId>
+                <version>3.2.5</version>
+            </dependency>
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>

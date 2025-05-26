@@ -9,26 +9,35 @@
         <version>0.1.0</version>
     </parent>
 
-    <artifactId>shelduer-core</artifactId>
+    <artifactId>shelduer-spring</artifactId>
+    <name>Shelduer Spring Integration</name>
 
     <dependencies>
 
+        <!-- Spring AOP -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
 
+        <!-- Core engine -->
+        <dependency>
+            <groupId>io.github.swampus</groupId>
+            <artifactId>shelduer-core</artifactId>
+            <version>0.1.0</version>
+        </dependency>
+
+        <!-- API (for ShelduerClient) -->
+        <dependency>
+            <groupId>io.github.swampus</groupId>
+            <artifactId>shelduer-api</artifactId>
+            <version>0.1.0</version>
+        </dependency>
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-simple</artifactId>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 </project>

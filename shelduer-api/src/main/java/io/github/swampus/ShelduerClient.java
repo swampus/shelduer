@@ -1,24 +1,27 @@
 package io.github.swampus;
 
+import io.github.swampus.access.IAccessManager;
+
 /**
  * External API for allowing/blocking runtime access to resources.
  * Can be used by AI systems or dynamic module loaders.
  */
-public class ShelduerClient {
+public class ShelduerClient implements IAccessManager {
 
-    public static void allow(String key) {
-        ShelduerEngine.allowAccess(key);
-    }
-
-    public static void block(String key) {
-        ShelduerEngine.blockAccess(key);
-    }
-
-    public static boolean isAllowed(String key) {
+    @Override
+    public boolean isAccessAllowed(String key) {
         return ShelduerEngine.isAccessAllowed(key);
     }
 
-    public static void resetAll() {
+    public void allow(String key) {
+        ShelduerEngine.allowAccess(key);
+    }
+
+    public void block(String key) {
+        ShelduerEngine.blockAccess(key);
+    }
+
+    public void resetAll() {
         ShelduerEngine.reset();
     }
 }
