@@ -1,4 +1,4 @@
-package io.github.swampus.aspect;
+package io.github.swampus.config.aspect;
 
 import io.github.swampus.AccessControlled;
 import io.github.swampus.access.IAccessManager;

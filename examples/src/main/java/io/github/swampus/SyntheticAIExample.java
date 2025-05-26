@@ -6,21 +6,21 @@ public class SyntheticAIExample {
 
     public static void main(String[] args) {
         AIModule module = new AIModule();
-
+        ShelduerClient shelduerClient = new ShelduerClient();
         //Ai register key of allow-access
-        ShelduerClient.allow("ai.retrain");
+        shelduerClient.allow("ai.retrain");
 
         System.out.println("Trying to retrain...");
-        if (ShelduerClient.isAllowed("ai.retrain")) {
+        if (shelduerClient.isAccessAllowed("ai.retrain")) {
             module.retrain();
         } else {
             System.out.println("[DENIED] Access to retrain is blocked.");
         }
 
-        ShelduerClient.block("ai.retrain");
+        shelduerClient.block("ai.retrain");
 
         System.out.println("Trying to retrain again...");
-        if (ShelduerClient.isAllowed("ai.retrain")) {
+        if (shelduerClient.isAccessAllowed("ai.retrain")) {
             module.retrain();
         } else {
             System.out.println("[DENIED] Access to retrain is blocked.");
