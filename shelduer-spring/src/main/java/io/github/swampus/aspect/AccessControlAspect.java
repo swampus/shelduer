@@ -1,6 +1,6 @@
-package io.github.swampus.config.aspect;
+package io.github.swampus.aspect;
 
-import io.github.swampus.AccessControlled;
+import io.github.swampus.access.AccessControlled;
 import io.github.swampus.access.IAccessManager;
 import io.github.swampus.exception.ShelduerAccessDeniedException;
 import lombok.RequiredArgsConstructor;

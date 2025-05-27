@@ -14,6 +14,7 @@
         <module>shelduer-api</module>
         <module>examples</module>
         <module>shelduer-spring</module>
+        <module>shelduer-spi</module>
     </modules>
 
     <properties>
@@ -25,6 +26,25 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>io.github.swampus</groupId>
+                <artifactId>shelduer-spi</artifactId>
+                <version>0.1.0</version>
+                <scope>compile</scope>
+            </dependency>
+            <dependency>
+                <groupId>io.github.swampus</groupId>
+                <artifactId>shelduer-core</artifactId>
+                <version>0.1.0</version>
+                <scope>compile</scope>
+            </dependency>
+            <dependency>
+                <groupId>io.github.swampus</groupId>
+                <artifactId>shelduer-api</artifactId>
+                <version>0.1.0</version>
+                <scope>compile</scope>
+            </dependency>
+
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-aop</artifactId>
@@ -39,11 +59,6 @@
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
-                <version>2.0.9</version>
-            </dependency>
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-simple</artifactId>
                 <version>2.0.9</version>
             </dependency>
         </dependencies>
