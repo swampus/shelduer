@@ -5,6 +5,7 @@ import io.github.swampus.access.AccessControlled;
 import io.github.swampus.access.LedgerTable;
 import io.github.swampus.exception.KeyProviderInstantiationException;
 import io.github.swampus.policy.AccessPolicy;
+import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -17,6 +18,7 @@ import java.lang.reflect.Method;
  * Aspect that intercepts methods annotated with @AccessControlled and applies access scheduling.
  */
 @Aspect
+@Slf4j
 @Component
 public class AccessInterceptor {
 
@@ -38,7 +40,8 @@ public class AccessInterceptor {
 
         boolean acquired = ledgerTable.tryAcquire(key, policy, timeout);
         if (!acquired) {
-            throw new IllegalStateException("Unable to acquire access to key: " + key);
+            log.debug("🚫 Access skipped for key: " + key + " [policy=" + policy + "]");
+            return null; // or throw, or just exit silently
         }
 
         try {
