@@ -26,7 +26,7 @@ public @interface AccessControlled {
     /**
      * Optional custom key provider class.
      */
-    Class<? extends KeyProvider> keyProvider() default DefaultKeyProvider.class;
+    Class<? extends KeyProvider> keyProvider() default KeyProvider.class;
 
     /**
      * Access policy for scheduling.

@@ -1,4 +1,4 @@
-package io.github.swampus.access;
+package io.github.swampus;
 
 import io.github.swampus.KeyProvider;
 

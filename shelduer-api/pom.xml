@@ -14,8 +14,7 @@
     <dependencies>
         <dependency>
             <groupId>io.github.swampus</groupId>
-            <artifactId>shelduer-core</artifactId>
-            <version>0.1.0</version>
+            <artifactId>shelduer-spi</artifactId>
         </dependency>
 
         <dependency>

@@ -1,40 +1,44 @@
 package io.github.swampus.aspect;
 
 import io.github.swampus.access.AccessControlled;
-import io.github.swampus.access.IAccessManager;
+import io.github.swampus.access.AccessLedger;
 import io.github.swampus.exception.ShelduerAccessDeniedException;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import io.github.swampus.policy.AccessPolicy;
+import io.github.swampus.resolver.SpELKeyResolver;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.Around;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.reflect.MethodSignature;
+import org.aspectj.lang.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.lang.reflect.Method;
-
-/**
- * Aspect that intercepts methods annotated with @AccessControlled.
- */
-@Slf4j
 @Aspect
 @Component
-@RequiredArgsConstructor
 public class AccessControlAspect {
 
-    private final IAccessManager accessManager;
+    private final AccessLedger accessLedger;
+    private final SpELKeyResolver keyResolver;
 
-    @Around("@annotation(io.github.swampus.shelduer.core.AccessControlled)")
-    public Object enforceAccess(ProceedingJoinPoint joinPoint) throws Throwable {
-        Method method = ((MethodSignature) joinPoint.getSignature()).getMethod();
-        AccessControlled annotation = method.getAnnotation(AccessControlled.class);
-        String key = annotation.value();
+    @Autowired
+    public AccessControlAspect(AccessLedger accessLedger, SpELKeyResolver keyResolver) {
+        this.accessLedger = accessLedger;
+        this.keyResolver = keyResolver;
+    }
 
-        if (!accessManager.isAccessAllowed(key)) {
-            log.warn("❌ Shelduer denied access to: {}", key);
-            throw new ShelduerAccessDeniedException(key);
+    @Around("@annotation(controlled)")
+    public Object checkAccess(ProceedingJoinPoint pjp, AccessControlled controlled)
+            throws Throwable {
+        String key = keyResolver.resolveKey(pjp, controlled.key());
+        AccessPolicy policy = controlled.policy();
+        long timeout = controlled.timeoutMs();
+
+        boolean acquired = accessLedger.tryAcquire(key, policy, timeout);
+        if (!acquired) {
+            throw new ShelduerAccessDeniedException("Access denied for key: " + key);
         }
 
-        return joinPoint.proceed();
+        try {
+            return pjp.proceed();
+        } finally {
+            accessLedger.release(key);
+        }
     }
 }
