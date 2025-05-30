@@ -16,6 +16,7 @@
         <module>shelduer-spring</module>
         <module>shelduer-spi</module>
         <module>shelduer-spring-boot-starter</module>
+        <module>shelduer-redis</module>
     </modules>
 
     <properties>
@@ -45,6 +46,11 @@
             <dependency>
                 <groupId>io.github.swampus</groupId>
                 <artifactId>shelduer-api</artifactId>
+                <version>0.1.0</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.swampus</groupId>
+                <artifactId>shelduer-redis</artifactId>
                 <version>0.1.0</version>
             </dependency>
 

@@ -60,12 +60,39 @@
 
         <dependency>
             <groupId>io.github.swampus</groupId>
+            <artifactId>shelduer-redis</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.github.swampus</groupId>
             <artifactId>shelduer-spi</artifactId>
         </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
+        </dependency>
+
+        <!-- Redis Client -->
+        <dependency>
+            <groupId>org.redisson</groupId>
+            <artifactId>redisson-spring-boot-starter</artifactId>
+            <version>3.27.2</version>
+        </dependency>
+
+        <!-- Testcontainers for Redis -->
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>1.19.8</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>redis</artifactId>
+            <version>1.19.8</version>
+            <scope>test</scope>
         </dependency>
 
         <dependency>

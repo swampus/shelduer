@@ -1,0 +1,3 @@
+shelduer:
+  ledger:
+    type: memory # or redis
