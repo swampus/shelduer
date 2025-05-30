@@ -29,11 +29,9 @@ public class FairAccessPolicyTest {
 
         CountDownLatch readyLatch = new CountDownLatch(totalClients);
         CountDownLatch startLatch = new CountDownLatch(1);
-
-        // Создаем цепочку latch'ей для гарантированного порядка запуска
         CountDownLatch[] orderLatches = new CountDownLatch[totalClients];
         for (int i = 0; i < totalClients; i++) {
-            orderLatches[i] = new CountDownLatch(i == 0 ? 0 : 1); // первый сразу открыт
+            orderLatches[i] = new CountDownLatch(i == 0 ? 0 : 1);
         }
 
         for (int i = 0; i < totalClients; i++) {
@@ -43,16 +41,12 @@ public class FairAccessPolicyTest {
                     readyLatch.countDown();
                     startLatch.await();
 
-                    // ждем, пока придет наша очередь (по номеру clientId)
                     orderLatches[clientId].await();
-
                     service.doWork(clientId);
 
-                    // открываем latch следующему номеру
                     if (clientId + 1 < totalClients) {
                         orderLatches[clientId + 1].countDown();
                     }
-
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
                     throw new RuntimeException(e);

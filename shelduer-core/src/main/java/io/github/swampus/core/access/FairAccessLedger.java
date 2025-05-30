@@ -15,7 +15,7 @@ public class FairAccessLedger implements AccessLedger {
 
     @Override
     public boolean tryAcquire(String key, AccessPolicy policy, long timeoutMs) {
-        Lock lock = lockMap.computeIfAbsent(key, k -> new ReentrantLock(true)); // <-- true = fair lock
+        Lock lock = lockMap.computeIfAbsent(key, k -> new ReentrantLock(true)); // fair lock
         try {
             return lock.tryLock(timeoutMs, TimeUnit.MILLISECONDS);
         } catch (InterruptedException e) {
