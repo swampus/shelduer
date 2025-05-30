@@ -1,7 +1,7 @@
 package io.github.swampus.aspect;
 
 import io.github.swampus.access.AccessControlled;
-import io.github.swampus.access.AccessLedger;
+import io.github.swampus.spi.access.AccessLedger;
 import io.github.swampus.exception.ShelduerAccessDeniedException;
 import io.github.swampus.policy.AccessPolicy;
 import io.github.swampus.resolver.SpELKeyResolver;
@@ -19,6 +19,7 @@ public class AccessControlAspect {
 
     @Autowired
     public AccessControlAspect(AccessLedger accessLedger, SpELKeyResolver keyResolver) {
+        System.out.println("AccessControlAspect: created");
         this.accessLedger = accessLedger;
         this.keyResolver = keyResolver;
     }
@@ -26,6 +27,7 @@ public class AccessControlAspect {
     @Around("@annotation(controlled)")
     public Object checkAccess(ProceedingJoinPoint pjp, AccessControlled controlled)
             throws Throwable {
+        System.out.println("[ASPECT] Intercepted: " + pjp.getSignature());
         String key = keyResolver.resolveKey(pjp, controlled.key());
         AccessPolicy policy = controlled.policy();
         long timeout = controlled.timeoutMs();

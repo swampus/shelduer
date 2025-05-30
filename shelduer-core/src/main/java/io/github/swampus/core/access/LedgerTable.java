@@ -1,4 +1,4 @@
-package io.github.swampus.access;
+package io.github.swampus.core.access;
 
 import io.github.swampus.policy.AccessPolicy;
 

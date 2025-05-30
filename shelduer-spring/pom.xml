@@ -20,21 +20,19 @@
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
 
-        <!-- Core engine -->
+
         <dependency>
             <groupId>io.github.swampus</groupId>
             <artifactId>shelduer-core</artifactId>
             <version>0.1.0</version>
         </dependency>
 
-        <!-- API (for ShelduerClient) -->
         <dependency>
             <groupId>io.github.swampus</groupId>
-            <artifactId>shelduer-api</artifactId>
+            <artifactId>shelduer-spi</artifactId>
             <version>0.1.0</version>
         </dependency>
 
-        <!-- SpEL -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-expression</artifactId>

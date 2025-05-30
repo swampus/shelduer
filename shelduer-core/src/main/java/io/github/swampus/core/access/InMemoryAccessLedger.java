@@ -1,6 +1,7 @@
-package io.github.swampus.access;
+package io.github.swampus.core.access;
 
 import io.github.swampus.policy.AccessPolicy;
+import io.github.swampus.spi.access.AccessLedger;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -14,18 +15,16 @@ public class InMemoryAccessLedger implements AccessLedger {
 
     private final Map<String, ReentrantLock> lockMap = new ConcurrentHashMap<>();
 
+    private final ReentrantLock lock = new ReentrantLock(/* fair = */ true);
+
     @Override
     public boolean tryAcquire(String key, AccessPolicy policy, long timeoutMs) {
-        ReentrantLock lock = lockMap.computeIfAbsent(key, k -> createLock(policy));
 
         try {
             switch (policy) {
-                case EXCLUSIVE, FAIR -> {
-                    if (timeoutMs > 0) {
-                        return lock.tryLock(timeoutMs, TimeUnit.MILLISECONDS);
-                    } else {
-                        return lock.tryLock();
-                    }
+                case FAIR -> {
+                    lock.lock(); // strict blocking with FIFO fairness
+                    return true;
                 }
                 case SKIP_IF_BUSY -> {
                     return lock.tryLock(0, TimeUnit.MILLISECONDS);
@@ -52,8 +51,7 @@ public class InMemoryAccessLedger implements AccessLedger {
     }
 
     private ReentrantLock createLock(AccessPolicy policy) {
-        boolean fair = policy == AccessPolicy.FAIR;
-        return new ReentrantLock(fair);
+        return new ReentrantLock(policy == AccessPolicy.FAIR);
     }
 }
 

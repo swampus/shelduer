@@ -29,21 +29,23 @@
         <dependencies>
             <dependency>
                 <groupId>io.github.swampus</groupId>
+                <artifactId>shelduer-spring</artifactId>
+                <version>0.1.0</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.swampus</groupId>
                 <artifactId>shelduer-spi</artifactId>
                 <version>0.1.0</version>
-                <scope>compile</scope>
             </dependency>
             <dependency>
                 <groupId>io.github.swampus</groupId>
                 <artifactId>shelduer-core</artifactId>
                 <version>0.1.0</version>
-                <scope>compile</scope>
             </dependency>
             <dependency>
                 <groupId>io.github.swampus</groupId>
                 <artifactId>shelduer-api</artifactId>
                 <version>0.1.0</version>
-                <scope>compile</scope>
             </dependency>
 
             <dependency>

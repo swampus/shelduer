@@ -2,7 +2,7 @@ package io.github.swampus.aspect;
 
 import io.github.swampus.KeyProvider;
 import io.github.swampus.access.AccessControlled;
-import io.github.swampus.access.LedgerTable;
+import io.github.swampus.core.access.LedgerTable;
 import io.github.swampus.exception.KeyProviderInstantiationException;
 import io.github.swampus.policy.AccessPolicy;
 import lombok.extern.slf4j.Slf4j;
